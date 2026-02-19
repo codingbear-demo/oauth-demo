@@ -5,6 +5,8 @@ import {
   Req,
   Res,
   UnauthorizedException,
+  HttpCode,
+  HttpStatus,
 } from '@nestjs/common';
 import type { Request, Response } from 'express';
 
@@ -19,15 +21,20 @@ export class ApiController {
   }
 
   @Post('logout')
-  logout(@Req() req: Request, @Res() res: Response) {
-    req.logout((err) => {
-      if (err) {
-        return res.status(500).json({ message: 'Logout failed' });
-      }
-      req.session.destroy(() => {
-        res.clearCookie('connect.sid');
-        res.json({ message: 'Logged out' });
-      });
+  @HttpCode(HttpStatus.OK)
+  async logout(
+    @Req() req: Request,
+    @Res({ passthrough: true }) res: Response,
+  ) {
+    await new Promise<void>((resolve, reject) => {
+      req.logout((err) => (err ? reject(err) : resolve()));
     });
+
+    await new Promise<void>((resolve) => {
+      req.session.destroy(() => resolve());
+    });
+
+    res.clearCookie('connect.sid');
+    return { message: 'Logged out' };
   }
 }
