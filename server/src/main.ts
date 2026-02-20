@@ -2,7 +2,8 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import cookieParser from 'cookie-parser';
 import session from 'express-session';
-import * as passport from 'passport';
+// eslint-disable-next-line @typescript-eslint/no-require-imports
+const passport = require('passport');
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
