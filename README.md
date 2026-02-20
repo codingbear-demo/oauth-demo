@@ -1,6 +1,6 @@
 # OAuth 2.0 Demo
 
-Google OAuth 2.0 + NestJS + Session 기반 포트폴리오 데모 프로젝트.
+Google OAuth 2.0 + NestJS + Session-based portfolio demo project.
 
 ## Architecture
 
@@ -8,24 +8,24 @@ Google OAuth 2.0 + NestJS + Session 기반 포트폴리오 데모 프로젝트.
 - **Frontend**: Vite + React + TypeScript + React Router
 - **Deployment**: EC2 + Nginx (reverse proxy) + PM2 + Let's Encrypt
 
-같은 오리진(NestJS가 React 빌드 정적 서빙)으로 세션 쿠키를 단순하게 유지합니다.
+Uses a single origin (NestJS serves the React build as static files) to keep session cookies simple.
 
 ## Local Development
 
-### 1. 환경 변수 설정
+### 1. Environment Variables
 
 ```bash
 cp .env.example .env
-# .env 파일에 실제 값 입력
+# Fill in actual values in the .env file
 ```
 
-### 2. Google OAuth 앱 설정
+### 2. Google OAuth App Setup
 
-[Google Cloud Console](https://console.cloud.google.com/)에서:
-- OAuth 2.0 클라이언트 생성
+In [Google Cloud Console](https://console.cloud.google.com/):
+- Create an OAuth 2.0 client
 - Authorized redirect URIs: `http://localhost:3000/auth/google/callback`
 
-### 3. 서버 실행
+### 3. Run Server
 
 ```bash
 cd server
@@ -33,7 +33,7 @@ npm install
 npm run start:dev
 ```
 
-### 4. 클라이언트 개발 서버 (선택)
+### 4. Client Dev Server (Optional)
 
 ```bash
 cd client
@@ -42,16 +42,16 @@ npm run dev
 # http://localhost:5173 (Vite proxy → NestJS 3000)
 ```
 
-### 5. 프로덕션 빌드 (통합)
+### 5. Production Build (Integrated)
 
 ```bash
-# 클라이언트 빌드
+# Build client
 cd client && npm run build
 
-# 서버 빌드
+# Build server
 cd server && npm run build
 
-# PM2로 실행
+# Run with PM2
 pm2 start ecosystem.config.js --env production
 ```
 
@@ -59,23 +59,23 @@ pm2 start ecosystem.config.js --env production
 
 | Method | Path | Description |
 |--------|------|-------------|
-| GET | `/auth/google` | Google OAuth 로그인 시작 |
-| GET | `/auth/google/callback` | Google OAuth 콜백 |
-| GET | `/api/me` | 현재 로그인 사용자 정보 |
-| POST | `/api/logout` | 로그아웃 |
+| GET | `/auth/google` | Initiate Google OAuth login |
+| GET | `/auth/google/callback` | Google OAuth callback |
+| GET | `/api/me` | Get current user info |
+| POST | `/api/logout` | Logout |
 
 ## Deployment (EC2 + Nginx)
 
 ```bash
-# Nginx 설정 (X-Forwarded-Proto 헤더 필수)
+# Nginx config (X-Forwarded-Proto header required)
 # Let's Encrypt: certbot --nginx -d oauth-demo.codingbear.dev
 # PM2: pm2 start ecosystem.config.js && pm2 save && pm2 startup
 ```
 
-자세한 배포 가이드는 `ecosystem.config.js` 참고.
+See `ecosystem.config.js` for detailed deployment configuration.
 
 ## Security Notes
 
-- `SESSION_SECRET`은 32자 이상 랜덤 문자열 사용
-- `.env` 파일은 절대 커밋 금지
-- Access/Refresh Token은 저장하지 않음 (프로필 정보만 in-memory store)
+- `SESSION_SECRET` must be a random string of 32+ characters
+- Never commit the `.env` file
+- Access/Refresh tokens are not stored (only profile info in in-memory store)

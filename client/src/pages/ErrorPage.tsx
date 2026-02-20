@@ -7,10 +7,10 @@ export default function ErrorPage() {
     <div className="page">
       <div className="card">
         <div className="error-icon">✕</div>
-        <h1>로그인 실패</h1>
-        <p>Google 인증 중 오류가 발생했습니다.</p>
+        <h1>Login Failed</h1>
+        <p>An error occurred during Google authentication.</p>
         <button className="btn btn-google" onClick={() => navigate('/')}>
-          다시 로그인
+          Try Again
         </button>
       </div>
     </div>

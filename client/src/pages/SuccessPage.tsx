@@ -45,15 +45,15 @@ export default function SuccessPage() {
     <div className="page">
       <div className="card">
         <div className="success-icon">✓</div>
-        <h1>로그인 성공!</h1>
+        <h1>Login Successful!</h1>
         {user && (
           <div className="user-info">
             <div className="info-row">
-              <span className="label">이름</span>
+              <span className="label">Name</span>
               <span className="value">{user.name}</span>
             </div>
             <div className="info-row">
-              <span className="label">이메일</span>
+              <span className="label">Email</span>
               <span className="value">{user.email}</span>
             </div>
             <div className="info-row">

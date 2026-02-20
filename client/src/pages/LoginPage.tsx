@@ -7,7 +7,7 @@ export default function LoginPage() {
     <div className="page">
       <div className="card">
         <h1>OAuth 2.0 Demo</h1>
-        <p>Google 계정으로 로그인하여 데모를 체험해보세요.</p>
+        <p>Sign in with your Google account to try the demo.</p>
         <button className="btn btn-google" onClick={handleLogin}>
           <svg
             xmlns="http://www.w3.org/2000/svg"

@@ -16,7 +16,7 @@ import { ApiModule } from './api/api.module';
     }),
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', '..', 'client', 'dist'),
-      exclude: ['/api/(.*)', '/auth/(.*)'],
+      exclude: ['/api/{*path}', '/auth/{*path}'],
     }),
     AuthModule,
     ApiModule,
