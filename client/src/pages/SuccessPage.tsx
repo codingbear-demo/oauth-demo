@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import confetti from 'canvas-confetti';
 import type { UserProfile } from '../types';
 
 export default function SuccessPage() {
@@ -22,6 +23,16 @@ export default function SuccessPage() {
       .catch(() => navigate('/error'))
       .finally(() => setLoading(false));
   }, [navigate]);
+
+  useEffect(() => {
+    if (!loading && user) {
+      confetti({
+        particleCount: 150,
+        spread: 70,
+        origin: { y: 0.6 },
+      });
+    }
+  }, [loading, user]);
 
   const handleLogout = async () => {
     await fetch('/api/logout', {
