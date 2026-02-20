@@ -34,6 +34,11 @@ export default function LoginPage() {
           </svg>
           Login with Google
         </button>
+        <div className="footer-links">
+          <a href="/privacy">Privacy Policy</a>
+          <span className="divider">|</span>
+          <a href="/terms">Terms of Service</a>
+        </div>
       </div>
     </div>
   );

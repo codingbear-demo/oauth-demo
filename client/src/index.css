@@ -155,6 +155,28 @@ p {
   color: #fff;
 }
 
+.footer-links {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  margin-top: 0.25rem;
+}
+
+.footer-links a {
+  color: #888;
+  text-decoration: none;
+}
+
+.footer-links a:hover {
+  color: #4285f4;
+  text-decoration: underline;
+}
+
+.footer-links .divider {
+  color: #ccc;
+}
+
 /* Legal pages (Privacy, Terms) */
 .legal-page {
   align-items: flex-start;
